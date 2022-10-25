@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import React, {useState, useCallback} from 'react';
 import './App.css';
+import Nav from './Components/Nav';
+import {contacts} from './Components/static-contacts'
+import ContactForm from './Components/ContactForm'
+import ContactList from './Components/ContactList'
 
-function App() {
+const App = () => {
+  const [activeTab, setActiveTab] = useState('contacts')
+  const [list, updateList] = useState([]);
+  const deleteContact = (contact) => {
+    const newContacts = list.filter( (_, i) => i !== contact)
+    updateList(newContacts)
+  }
+
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Contacts APP</h1>
+      <Nav activeTab={activeTab} onTabChange={setActiveTab}/>
+      <main className="App-content">
+    <Content tab={activeTab}  deleteContact={deleteContact}/>
+    </main>
+      
     </div>
   );
+}
+
+const Content = ( {tab} ) => {
+  switch (tab) {
+    case 'Contacts':
+      return <ContactList contacts={contacts}  />
+    case 'Add':
+      return <ContactForm/>
+  } 
 }
 
 export default App;
