@@ -33,4 +33,14 @@ let contacts = [
     }
 ]
 
+// let contacts = {
+//     name: "",
+//     email: "",
+//     phoneNumber: "",
+//     address: "",
+//     city: "",
+//     state: "",
+//     zipcode: ""
+//   }
+
 export {contacts}
